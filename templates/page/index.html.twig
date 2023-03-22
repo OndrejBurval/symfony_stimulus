@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block title %}Homepage{% endblock %}
+{% set imgUrl = 'https://upload.wikimedia.org/wikipedia/commons/e/e7/Everest_North_Face_toward_Base_Camp_Tibet_Luca_Galuzzi_2006.jpg' %}
+
+{% block body %}
+    <div class="container" {{ stimulus_controller('cards/wrapper') }} {{ stimulus_target('cards/wrapper', 'wrapper') }}>
+        <div class="d-flex flex-wrap flex-row gap-4 my-4">
+            {% for i in 0..6 %}
+                <div class="card" style="width: 18rem;" {{ stimulus_controller('cards/card', { 'random': 'asckjgagjsckjasc'}) }} {{ stimulus_target('cards/wrapper', 'card') }}>
+                    <img src="{{ imgUrl }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title" {{ stimulus_target('cards/card', 'title') }}>Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <button type="button"
+                                id="changeTitleButton"
+                                class="btn btn-primary"
+                                {{ stimulus_action('cards/card', 'changeTitle', 'click', {
+                                    'title': 'New title'
+                                }) }}>
+                            Change Title
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="card cardAddNew">
+            <div class="card-body d-flex justify-content-center align-items-center">
+                <button
+                    type="button"
+                    class="btn btn-primary" {{ stimulus_action('cards/wrapper', 'addCard') }}>
+                    Add new
+                </button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
